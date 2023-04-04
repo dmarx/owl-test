@@ -1,4 +1,4 @@
-name: Complete Code with OpenAI LLM
+name: Draw Owl
 
 on:
   push:
@@ -19,20 +19,18 @@ jobs:
         python-version: 3.8
 
     - name: Install dependencies
-      run: pip install omegaconf openai
+      run: pip install -r requirements.txt
 
     - name: Run complete_code.py
       run: python complete_code.py
 
-    - name: Commit and push changes
-      run: |
-        git config --global user.name "Your Name"
-        git config --global user.email "you@example.com"
-        git checkout -b ${{ env.BRANCH_NAME }}
-        git add .
-        git commit -m "${{ env.COMMIT_MESSAGE }}"
-        git push -u origin ${{ env.BRANCH_NAME }}
+    - name: Get config output
+      id: config_output
+      run: echo "::set-output name=config::$(cat config.yaml)"
 
-    env:
-      BRANCH_NAME: ${{ fromJson(steps.complete_code.outputs.config).branch_name }}
-      COMMIT_MESSAGE: ${{ fromJson(steps.complete_code.outputs.config).commit_message }}
+    - name: Create branch and commit
+      run: |
+        git checkout -b ${{ fromJson(steps.config_output.outputs.config).branch_name }}
+        git add .
+        git commit -m "${{ fromJson(steps.config_output.outputs.config).commit_message }}"
+        git push origin ${{ fromJson(steps.config_output.outputs.config).branch_name }}
