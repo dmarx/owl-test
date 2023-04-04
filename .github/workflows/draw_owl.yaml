@@ -21,8 +21,8 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    - name: Run complete_code.py
-      run: python complete_code.py
+    - name: Run draw_owl.py
+      run: python draw_owl.py
 
     - name: Get config output
       id: config_output
