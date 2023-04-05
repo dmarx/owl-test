@@ -31,7 +31,6 @@ DEFAULT_USER_TEMPLATE = (
     "respond with the completed document. "
     "do not acknowledge me or my inquiry. "
     "respond only with perfect, working code and/or documentation. "
-    "##BEGIN CONTENT##
 )
 
 def generate_code_completion(prompt: str) -> str:
