@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  BRANCH_NAME: lllm_autocomplete
-  COMMIT_MESSAGE: LLM autocomplete
+  BRANCH_NAME: "llm_autocomplete"
+  COMMIT_MESSAGE: "LLM autocomplete"
   TRIGGER_WORD: 4LLM
 
 jobs:
