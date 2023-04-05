@@ -1,28 +1,34 @@
 # Config file for complete_code.py
 
 # OpenAI API key
-api_key: YOUR_OPENAI_API_KEY
+# ... just kidding, don't put that in here. as a rule of thumb, you should probably never commit API tokens. 
+# check instructions to configure it as a github secret in the github repo
 
 # Input file containing the code prompts
+# would actually prefer to just do that in here i think?
 input_file: prompts.txt
 
 # Output directory to store completed code files
 output_dir: output
 
-# File extension for completed code files
-output_file_extension: .py
+commit_message_tag: "#4LLM"
 
-# GitHub repository name
-repo_name: myrepo
+# File extension for completed code files
+#output_file_extension: .py
+prompt_extension: .llm_prompt
+target_extension: .py
 
 # Branch name for creating a new branch and pushing changes
 branch_name: complete-code
 
 # Commit message for the new commit
+# to do: have LLM propose a commit message in the response too
 commit_message: "Completed code using OpenAI LLM"
 
 # Maximum number of tokens allowed in API call
 max_tokens: 1024
+
+model_name: gpt-3.5-turbo
 
 # Completion options for OpenAI API
 completion_options:
