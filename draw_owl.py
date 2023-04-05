@@ -11,12 +11,12 @@ model_name = config.model_name
 prompt_extension = config.prompt_extension
 target_extension = config.target_extension
 commit_message_tag = config.commit_message_tag
-commit_message_prefix = config.commit_message_prefix
-repo_name = config.repo_name
+#commit_message_prefix = config.commit_message_prefix
+#repo_name = config.repo_name
 branch_name = config.branch_name
 
 # Set up OpenAI API
-openai.api_key = config.api_key
+#openai.api_key = config.api_key
 
 
 def generate_code_completion(prompt: str) -> str:
@@ -64,8 +64,8 @@ if __name__ == "__main__":
     prompt_extension = config.prompt_extension
     target_extension = config.target_extension
     commit_message_tag = config.commit_message_tag
-    commit_message_prefix = config.commit_message_prefix
-    repo_name = config.repo_name
+    #commit_message_prefix = config.commit_message_prefix
+    #repo_name = config.repo_name
     branch_name = config.branch_name
 
     # Process each file with prompt extension
@@ -74,9 +74,9 @@ if __name__ == "__main__":
             process_file(file_name)
 
     # Commit and push changes
-    os.system("git checkout -b {}_{}".format(commit_message_prefix, branch_name))
+    os.system(f"git checkout -b {config.branch_name}")
     os.system("git add .")
-    os.system("git commit -m '{}: Add completed code'".format(commit_message_tag))
-    os.system("git push -u origin {}_{}".format(commit_message_prefix, branch_name))
+    os.system("git commit -m 'LLM autocompletion'")
+    os.system(f"git push -u origin {config.branch_name}"
 
-    print("Code completion completed and changes pushed to branch {}_{}".format(commit_message_prefix, branch_name))
+    print(f"Code completion completed and changes pushed to branch {config.branch_name}")
