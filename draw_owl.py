@@ -2,21 +2,7 @@ import os
 import openai
 from omegaconf import OmegaConf
 
-# Load config from config.yaml
-CONFIG_FILE = "config.yaml"
-config = OmegaConf.load(CONFIG_FILE)
-
-# Extract variables from config
-model_name = config.model_name
-prompt_extension = config.prompt_extension
-target_extension = config.target_extension
-commit_message_tag = config.commit_message_tag
-#commit_message_prefix = config.commit_message_prefix
-#repo_name = config.repo_name
-branch_name = config.branch_name
-
-# Set up OpenAI API
-#openai.api_key = config.api_key
+CONFIG_FILE="config.yaml"
 
 DEFAULT_SYSTEM_PROMPT = (
     "You are an experienced staff software engineer who writes perfect code. "
@@ -29,11 +15,12 @@ DEFAULT_USER_TEMPLATE = (
     "you are presented with the following incomplete document. "
     "<document>\n{text}\n</document>\n"
     "respond with the completed document. "
-    "do not acknowledge me or my inquiry. "
+    "do not acknowledge me or my inquiry. Do not provide any caveats, disclaimers, or followup thoughts. "
     "respond only with perfect, working code and/or documentation. "
+    "Do not add any additional formatting. your response should be only the raw text contents of the requested completed document. "
 )
 
-def generate_code_completion(prompt: str) -> str:
+def generate_code_completion(prompt: str, model_name: str) -> str:
     """
     Generate code completion using OpenAI's Codex model.
 
@@ -56,7 +43,12 @@ def generate_code_completion(prompt: str) -> str:
     return completions.choices[0]['message']['content'].strip()
 
 
-def process_file(file_path: str) -> None:
+def process_file(
+    file_path: str,
+    model_name: str, 
+    prompt_extension: str, 
+    target_extension: str,
+) -> None:
     """
     Process a file by generating code completion for the prompts in the file.
 
@@ -70,10 +62,9 @@ def process_file(file_path: str) -> None:
     #for prompt in prompts:
     if not prompt:
         return
-    completed_code = generate_code_completion(prompt)
+    completed_code = generate_code_completion(prompt, model_name)
     print(completed_code)
     target_file = os.path.splitext(file_path)[0] + target_extension
-    #with open(target_file, "a") as f:
     print(target_file)
     with open(target_file, "w") as f:
         f.write(completed_code + "\n")
@@ -87,20 +78,8 @@ if __name__ == "__main__":
     model_name = config.model_name
     prompt_extension = config.prompt_extension
     target_extension = config.target_extension
-    commit_message_tag = config.commit_message_tag
-    #commit_message_prefix = config.commit_message_prefix
-    #repo_name = config.repo_name
-    branch_name = config.branch_name
 
     # Process each file with prompt extension
     for file_name in os.listdir():
         if file_name.endswith(prompt_extension):
-            process_file(file_name)
-
-#     # Commit and push changes
-#     os.system(f"git checkout -b {config.branch_name}")
-#     os.system("git add .")
-#     os.system("git commit -m 'LLM autocompletion'")
-#     os.system(f"git push -u origin {config.branch_name}")
-
-#     print(f"Code completion completed and changes pushed to branch {config.branch_name}")
+            process_file(file_name, model_name, prompt_extension, target_extension)
