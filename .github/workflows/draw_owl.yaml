@@ -7,8 +7,8 @@ on:
       - main
 
 env:
-  BRANCH_NAME: "llmautocomplete"
-  COMMIT_MESSAGE: "autocompleted"
+  BRANCH_NAME: llm_autocomplete_$GITHUB_RUN_NUMBER
+  COMMIT_MESSAGE: auto completed
   TRIGGER_WORD: 4LLM
   # TO DO: scope this better
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
