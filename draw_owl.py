@@ -63,15 +63,20 @@ def process_file(file_path: str) -> None:
     Args:
         file_path (str): The file path of the file to process.
     """
+    print(file_path)
     with open(file_path, "r") as file:
-        prompts = file.read().split("\n")
-    for prompt in prompts:
-        if not prompt:
-            continue
-        completed_code = generate_code_completion(prompt)
-        target_file = os.path.splitext(file_path)[0] + target_extension
-        with open(target_file, "a") as f:
-            f.write(completed_code + "\n")
+        #prompts = file.read().split("\n")
+        prompt = file.read()
+    #for prompt in prompts:
+    if not prompt:
+        return
+    completed_code = generate_code_completion(prompt)
+    print(completed_code)
+    target_file = os.path.splitext(file_path)[0] + target_extension
+    #with open(target_file, "a") as f:
+    print(target_file)
+    with open(target_file, "w") as f:
+        f.write(completed_code + "\n")
 
 
 if __name__ == "__main__":
@@ -92,10 +97,10 @@ if __name__ == "__main__":
         if file_name.endswith(prompt_extension):
             process_file(file_name)
 
-    # Commit and push changes
-    os.system(f"git checkout -b {config.branch_name}")
-    os.system("git add .")
-    os.system("git commit -m 'LLM autocompletion'")
-    os.system(f"git push -u origin {config.branch_name}")
+#     # Commit and push changes
+#     os.system(f"git checkout -b {config.branch_name}")
+#     os.system("git add .")
+#     os.system("git commit -m 'LLM autocompletion'")
+#     os.system(f"git push -u origin {config.branch_name}")
 
-    print(f"Code completion completed and changes pushed to branch {config.branch_name}")
+#     print(f"Code completion completed and changes pushed to branch {config.branch_name}")
