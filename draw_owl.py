@@ -77,6 +77,6 @@ if __name__ == "__main__":
     os.system(f"git checkout -b {config.branch_name}")
     os.system("git add .")
     os.system("git commit -m 'LLM autocompletion'")
-    os.system(f"git push -u origin {config.branch_name}"
+    os.system(f"git push -u origin {config.branch_name}")
 
     print(f"Code completion completed and changes pushed to branch {config.branch_name}")
