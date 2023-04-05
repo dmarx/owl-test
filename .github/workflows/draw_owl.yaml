@@ -8,7 +8,7 @@ on:
 
 env:
   BRANCH_NAME: llm_autocomplete_$GITHUB_RUN_NUMBER
-  COMMIT_MESSAGE: "'auto completed'"
+  COMMIT_MESSAGE: Auto completed.
   TRIGGER_WORD: 4LLM
   # TO DO: scope this better
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -73,5 +73,5 @@ jobs:
     - name: commit new work
       run: |  
         git add .
-        git commit -m $COMMIT_MESSAGE
+        git commit -m "$COMMIT_MESSAGE"
         git push origin $BRANCH_NAME
