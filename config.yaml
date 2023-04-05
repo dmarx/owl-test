@@ -11,7 +11,7 @@ input_file: prompts.txt
 # Output directory to store completed code files
 output_dir: output
 
-commit_message_tag: "#4LLM"
+commit_message_tag: "~4LLM"
 
 # File extension for completed code files
 #output_file_extension: .py
