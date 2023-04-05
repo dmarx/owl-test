@@ -9,6 +9,8 @@ env:
   BRANCH_NAME: "llmautocomplete"
   COMMIT_MESSAGE: "autocompleted"
   TRIGGER_WORD: 4LLM
+  # TO DO: scope this better
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
 # https://github.com/actions/runner/issues/662
 jobs:
