@@ -18,6 +18,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Check commit message
+      run: |
+        if [[ ! "${{ github.event.head_commit.message }}" =~ $TRIGGER_WORD ]]; then
+          echo "Commit message does not contain trigger word. Skipping job."
+          exit 0
+        fi
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -27,13 +34,8 @@ jobs:
       run: pip install -r requirements.txt
       
     - name: Run draw_owl.py
-      run: |
-        if echo "${{ github.event.head_commit.message }}" | grep -iq $TRIGGER_WORD; then
-          python draw_owl.py
-        else
-          echo "Skipping draw_owl.py as commit message does not contain trigger word" $TRIGGER_WORD
-        fi
-
+      run: python draw_owl.py
+        
     - name: Create branch and commit
       run: |
         git checkout -b $BRANCH_NAME
