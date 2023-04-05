@@ -13,6 +13,7 @@ env:
 # https://github.com/actions/runner/issues/662
 jobs:
   check:
+    runs-on: ubuntu-latest
     outputs:
       status: ${{ steps.early.outputs.status }}
     steps:
