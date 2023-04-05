@@ -43,7 +43,7 @@ def generate_code_completion(prompt: str) -> str:
     Returns:
         str: The generated code completion.
     """
-    completions = openai.Completion.create(
+    completions = openai.ChatCompletion.create(
         engine=model_name,
         #prompt=prompt,
         max_tokens=2048,
