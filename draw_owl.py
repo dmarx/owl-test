@@ -53,7 +53,7 @@ def generate_code_completion(prompt: str) -> str:
             {"role": "user", "content": DEFAULT_USER_TEMPLATE.format(text=prompt)},
         ],
     )
-    return completions.choices[0].text.strip()
+    return completions.choices[0]['message']['content'].strip()
 
 
 def process_file(file_path: str) -> None:
