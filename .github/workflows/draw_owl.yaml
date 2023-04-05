@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  BRANCH_NAME: "llm_autocomplete"
-  COMMIT_MESSAGE: "LLM autocomplete"
+  BRANCH_NAME: "llmautocomplete"
+  COMMIT_MESSAGE: "autocompleted"
   TRIGGER_WORD: 4LLM
 
 # https://github.com/actions/runner/issues/662
@@ -27,6 +27,7 @@ jobs:
           then
             status="execute"
           fi
+          echo $status
 
           echo "status=$status" >> $GITHUB_OUTPUT
 
