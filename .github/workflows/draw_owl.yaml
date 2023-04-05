@@ -58,8 +58,7 @@ jobs:
         git config --global user.name "llm autocomplete"
         git config --global user.email "llm@fakemail.com"
         git checkout -b $BRANCH_NAME
-        git pull origin
-        git rebase main
+        git pull origin $BRANCH_NAME && git rebase main
         
     - name: Set up Python
       uses: actions/setup-python@v2
