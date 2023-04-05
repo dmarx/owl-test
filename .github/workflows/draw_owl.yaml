@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  BRANCH_NAME
-  COMMIT_MESSAGE
+  BRANCH_NAME: lllm_autocomplete
+  COMMIT_MESSAGE: LLM autocomplete
 
 jobs:
   complete_code:
