@@ -7,7 +7,7 @@ on:
       - main
 
 env:
-  BRANCH_NAME: llm_autocomplete_$GITHUB_RUN_NUMBER
+  BRANCH_NAME: llm_autocomplete_${{ env.GITHUB_RUN_NUMBER }}
   COMMIT_MESSAGE: Auto completed.
   TRIGGER_WORD: 4LLM
   # TO DO: scope this better
