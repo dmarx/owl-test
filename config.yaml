@@ -1,4 +1,3 @@
-# Config file for complete_code.py
 
 input_file: prompts.txt
 output_dir: output
