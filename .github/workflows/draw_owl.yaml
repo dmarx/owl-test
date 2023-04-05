@@ -7,7 +7,7 @@ on:
       - main
 
 env:
-  BRANCH_NAME: llm_autocomplete
+  BRANCH_NAME: llm_autocomplete-$GITHUB_RUN_NUMBER
   COMMIT_MESSAGE: Auto completed.
   TRIGGER_WORD: 4LLM
   # TO DO: scope this better
@@ -57,7 +57,7 @@ jobs:
       run: |
         git config --global user.name "llm autocomplete"
         git config --global user.email "llm@fakemail.com"
-        git checkout -b $BRANCH_NAME_$GITHUB_RUN_NUMBER
+        git checkout -b $BRANCH_NAME
         
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -74,4 +74,4 @@ jobs:
       run: |  
         git add .
         git commit -m "$COMMIT_MESSAGE"
-        git push origin $BRANCH_NAME_$GITHUB_RUN_NUMBER
+        git push origin $BRANCH_NAME
