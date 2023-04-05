@@ -28,10 +28,6 @@ jobs:
     - name: Run draw_owl.py
       run: python draw_owl.py
 
-    - name: Get config output
-      id: config_output
-      run: echo "::set-output name=config::$(cat config.yaml)"
-
     - name: Create branch and commit
       run: |
         git checkout -b $BRANCH_NAME
