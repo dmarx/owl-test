@@ -18,6 +18,21 @@ branch_name = config.branch_name
 # Set up OpenAI API
 #openai.api_key = config.api_key
 
+DEFAULT_SYSTEM_PROMPT = (
+    "You are an experienced staff software engineer who writes perfect code. "
+    "Your code is concise, self-explanatory, modular, scalable, and generally demonstrates best practices. "
+    "You prefer python. Your python code is always fully type hinted and has docstrings formatted for generating documentation. "
+    "Your projects include full test coverage. Pytest is your prefferred testing framework. "
+    "You use github actions for ci/cd automation. "
+)
+DEFAULT_USER_TEMPLATE = (
+    "you are presented with the following incomplete document. "
+    "<document>\n{text}\n</document>\n"
+    "respond with the completed document. "
+    "do not acknowledge me or my inquiry. "
+    "respond only with perfect, working code and/or documentation. "
+    "##BEGIN CONTENT##
+)
 
 def generate_code_completion(prompt: str) -> str:
     """
@@ -31,8 +46,12 @@ def generate_code_completion(prompt: str) -> str:
     """
     completions = openai.Completion.create(
         engine=model_name,
-        prompt=prompt,
+        #prompt=prompt,
         max_tokens=2048,
+        messages=[
+            {"role": "system", "content": DEFAULT_SYSTEM_PROMPT},
+            {"role": "user", "content": DEFAULT_USER_TEMPLATE.format(text=prompt)},
+        ],
     )
     return completions.choices[0].text.strip()
 
